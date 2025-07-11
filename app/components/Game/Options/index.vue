@@ -4,27 +4,23 @@ import { useGameStore } from '~/stores/Game'
 
 const GameStore = useGameStore()
 
-const emit = defineEmits<{
-	(e: 'checkCorrect', option: number): void
-}>()
-
 const options = ref<number[]>([])
+const blockClick = ref(false)
+let correctAnswer: number
 
 function generateOptions() {
 	const expression = GameStore.expression
 	const difficulty = GameStore.difficulty
 
 	if (expression === '') return
+	options.value = []
 
-	const correctAnswer = MathUtils.calculateExpression(expression)
+	correctAnswer = MathUtils.calculateExpression(expression)
 	const optionsSet = new Set<number>()
 	optionsSet.add(correctAnswer)
 
-	console.log('Start options generation')
 	while (optionsSet.size < 4) {
-		const perturbationRange = correctAnswer === 0 ? 2 / difficulty : (correctAnswer / difficulty) * 1.5
-
-		const range = MathUtils.getDistractionRange(correctAnswer, difficulty)
+		const perturbationRange = MathUtils.getPerturbationRange(correctAnswer, difficulty)
 
 		let perturbation = 0
 
@@ -46,22 +42,15 @@ function generateOptions() {
 
 		optionsSet.add(distractor)
 	}
-	console.log('End options generation')
 
 	options.value = Array.from(optionsSet).sort(() => Math.random() - 0.5)
-
-	console.log('startTimer')
+	blockClick.value = false
 }
 
-function checkCorrect(option?: number) {
-	let rightAnswer = false
-
-	if (option) {
-		const expressionResult = MathUtils.calculateExpression(GameStore.expression)
-		console.log(expressionResult)
-
-		rightAnswer = option === expressionResult
-	}
+function checkCorrect(option: number) {
+	if (blockClick.value) return
+	blockClick.value = true
+	const rightAnswer = option === correctAnswer
 
 	if (rightAnswer) {
 		console.log('Correct!')
@@ -74,15 +63,17 @@ function checkCorrect(option?: number) {
 
 watch(
 	() => GameStore.expression,
-	newValue => {
-		console.log('Expression changed:', newValue)
-		if (newValue) generateOptions()
-	}
+	(newValue, oldValue) => {
+		if (newValue !== oldValue) {
+			generateOptions()
+		}
+	},
+	{ immediate: true }
 )
 </script>
 
 <template>
 	<div class="grid grid-cols-2 grid-rows-2 gap-4 w-full">
-		<GameOptionsButton v-for="option in options" :index="option" :value="option" @click="() => checkCorrect(option)" />
+		<GameOptionsButton v-for="option in options" :key="option" :value="option" @click="() => checkCorrect(option)" />
 	</div>
 </template>

@@ -3,4 +3,4 @@ export default {
 	MEDIUM: 5,
 	HARD: 8,
 	EXPERT: 10,
-}
+} as const

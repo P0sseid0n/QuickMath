@@ -8,9 +8,7 @@ export const useGameStore = defineStore('Game', () => {
 	const difficulty = ref(1)
 
 	function startRound() {
-		console.log('Starting new round with difficulty:', difficulty.value)
 		expression.value = MathUtils.generateMathExpression(difficulty.value)
-		console.log('Generated expression:', expression.value)
 	}
 
 	return {

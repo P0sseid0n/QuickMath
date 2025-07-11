@@ -1,22 +1,22 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
- future: {
-					compatibilityVersion: 4,
+	future: {
+		compatibilityVersion: 4,
 	},
 
- compatibilityDate: '2024-11-01',
- devtools: { enabled: true },
+	compatibilityDate: '2024-11-01',
+	devtools: { enabled: true },
 
- vite: {
-					plugins: [tailwindcss()],
+	vite: {
+		plugins: [tailwindcss()],
 	},
 
- css: ['~/assets/main.css'],
+	css: ['~/assets/main.css'],
 
- typescript: {
-					strict: true,
+	typescript: {
+		strict: true,
 	},
 
- modules: ['@pinia/nuxt'],
+	modules: ['@pinia/nuxt', '@nuxt/test-utils/module'],
 })

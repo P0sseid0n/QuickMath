@@ -10,10 +10,6 @@ function formatOption(option: number): string {
 		return option.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 	}
 }
-
-const emit = defineEmits<{
-	(e: 'checkCorrect', option: number): void
-}>()
 </script>
 
 <template>

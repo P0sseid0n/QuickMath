@@ -24,7 +24,7 @@ export function getRandomNumberBetween(min: number, max: number, integer: boolea
 
 export function generateMathExpression(difficulty: number) {
 	const min = 1
-	const max = 10 * difficulty //  TODO: Testar somar dificuldade
+	const max = 10 * (difficulty * 2)
 	const numOperations = difficulty
 
 	let expressionResult = getRandomNumberBetween(min, max, true).toString()
@@ -37,7 +37,6 @@ export function generateMathExpression(difficulty: number) {
 		if (operation === '/' && nextNumber === 0) nextNumber = 1
 
 		const useParentheses = i < numOperations - 1 ? Math.random() < parenthesesChance / 100 : false
-		console.log('useParentheses', useParentheses)
 		if (useParentheses) {
 			expressionResult = `(${expressionResult} ${operation} ${nextNumber})`
 		} else {
@@ -48,11 +47,19 @@ export function generateMathExpression(difficulty: number) {
 	return expressionResult
 }
 
-export function getDistractionRange(correctAnswer: number, difficulty: number): number {
-	const baseRange = 5 * difficulty
-	const scaledRange = Math.floor(correctAnswer * 0.2)
+export function getPerturbationRange(correctAnswer: number, difficulty: number): number {
+	const minRange = 3
+	const maxRange = 10
 
-	return Math.max(baseRange, scaledRange)
+	let perturbationRange = 0
+	if (correctAnswer === 0) {
+		perturbationRange = minRange
+	} else {
+		perturbationRange = (Math.abs(correctAnswer) / difficulty) * 1.2
+		perturbationRange = Math.max(minRange, Math.min(perturbationRange, maxRange))
+	}
+
+	return perturbationRange
 }
 
 export default {
@@ -60,5 +67,5 @@ export default {
 	getRandomOperation,
 	getRandomNumberBetween,
 	generateMathExpression,
-	getDistractionRange,
+	getPerturbationRange,
 }
