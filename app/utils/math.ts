@@ -1,7 +1,16 @@
+import { evaluate, floor, round } from 'mathjs'
 import DifficultyLevels from '~/constants/difficultyLevels'
 
+/**
+ * Avalia uma expressão matemática de forma segura.
+ * Retorna NaN se a expressão for inválida.
+ */
 export function calculateExpression(expression: string): number {
-	return new Function(`return ${expression}`)()
+	try {
+		return evaluate(expression)
+	} catch {
+		return NaN
+	}
 }
 
 export function getRandomOperation(difficulty: number): string {
@@ -16,16 +25,27 @@ export function getRandomOperation(difficulty: number): string {
 	return operations[Math.floor(Math.random() * operations.length)]!
 }
 
+/**
+ * Gera um número aleatório entre min e max.
+ * Se integer=true, retorna inteiro. Se false, retorna float com 2 casas decimais.
+ */
 export function getRandomNumberBetween(min: number, max: number, integer: boolean = true): number {
 	const randomNumber = Math.random() * (max - min) + min
-
-	return integer ? Math.floor(randomNumber) : Math.round(randomNumber * 100) / 100
+	if (integer) {
+		return Math.round(randomNumber)
+	} else {
+		return Math.round(randomNumber * 100) / 100
+	}
 }
 
+/**
+ * Gera uma expressão matemática aleatória baseada na dificuldade.
+ * Limita o valor máximo para evitar resultados exagerados.
+ */
 export function generateMathExpression(difficulty: number) {
 	const min = 1
-	const max = 10 * (difficulty * 2)
-	const numOperations = difficulty
+	const max = Math.min(10 * (difficulty * 2), 50)
+	const numOperations = Math.max(1, Math.min(difficulty, 5))
 
 	let expressionResult = getRandomNumberBetween(min, max, true).toString()
 	const parenthesesChance = 30
