@@ -51,6 +51,16 @@ pnpm test
 pnpm test --coverage
 ```
 
+## 🎨 Interface
+
+O jogo apresenta uma interface limpa e moderna com:
+
+-  Design escuro e minimalista
+-  Grid 2x2 para as opções de resposta
+-  Fonte monoespaçada para melhor legibilidade
+-  Transições suaves nos botões
+-  Responsividade em diferentes dispositivos
+
 ## 🎯 Funcionalidades
 
 ### Níveis de Dificuldade
@@ -110,6 +120,27 @@ Execute os testes:
 pnpm test
 ```
 
+## 🚧 Roadmap - Próximas Features
+
+### Em Desenvolvimento
+
+-  [ ] **Sistema de Pontuação** - Implementar sistema de pontos baseado em acertos e tempo de resposta
+-  [ ] **Temas de Jogo**
+   -  [ ] Modo Contra o Tempo - Resolver o máximo de questões em tempo limitado
+   -  [ ] Modo Infinito - Jogo contínuo com dificuldade progressiva
+-  [ ] **Perfil de Usuário** - Sistema de cadastro e personalização do jogador
+-  [ ] **Ranking de Usuários** - Placar global com melhores pontuações
+
+### Ideias Futuras
+
+-  [ ] Conquistas e badges
+-  [ ] Multiplayer em tempo real
+-  [ ] Estatísticas detalhadas de desempenho
+-  [ ] Sistema de níveis e progressão
+-  [ ] Personalização de temas e cores
+-  [ ] Integração com redes sociais para compartilhamento de conquistas
+-  [ ] Suporte a múltiplos idiomas
+
 ## 🤝 Contribuindo
 
 1. Faça um fork do projeto
@@ -121,17 +152,3 @@ pnpm test
 ## 📄 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-
-## 🎨 Interface
-
-O jogo apresenta uma interface limpa e moderna com:
-
--  Design escuro e minimalista
--  Grid 2x2 para as opções de resposta
--  Fonte monoespaçada para melhor legibilidade
--  Transições suaves nos botões
--  Responsividade em diferentes dispositivos
-
----
-
-Desenvolvido com ❤️ usando Nuxt 3
