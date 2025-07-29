@@ -31,7 +31,7 @@ onMounted(() => {
 				</div>
 			</section>
 
-			<main class="select-none bg-white/2 rounded-2xl py-20 my-8 w-full text-center">
+			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 my-8 w-full text-center">
 				<h3 :style="{ fontSize }">{{ GameStore.expression }} = ?</h3>
 			</main>
 

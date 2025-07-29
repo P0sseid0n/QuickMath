@@ -73,7 +73,7 @@ watch(
 </script>
 
 <template>
-	<div class="grid grid-cols-2 grid-rows-2 gap-4 w-full">
+	<div id="Options" class="grid grid-cols-2 grid-rows-2 gap-4 w-full">
 		<GameOptionsButton v-for="option in options" :key="option" :value="option" @click="() => checkCorrect(option)" />
 	</div>
 </template>

@@ -7,7 +7,11 @@ export const useGameStore = defineStore('Game', () => {
 
 	const difficulty = ref(1)
 
-	function startRound() {
+	function startRound(options: { difficulty?: number } = {}) {
+		if (options.difficulty !== undefined && options.difficulty >= 1) {
+			difficulty.value = options.difficulty
+		}
+
 		expression.value = MathUtils.generateMathExpression(difficulty.value)
 	}
 

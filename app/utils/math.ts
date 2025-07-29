@@ -3,17 +3,10 @@ import DifficultyLevels from '~/constants/difficultyLevels'
 
 /**
  * Avalia uma expressão matemática de forma segura.
- * Retorna NaN se a expressão for inválida.
  */
-export function calculateExpression(expression: string): number {
-	try {
-		return evaluate(expression)
-	} catch {
-		return NaN
-	}
-}
+export const calculateExpression = (expression: string): number => evaluate(expression)
 
-export function getRandomOperation(difficulty: number): string {
+export const getRandomOperation = (difficulty: number): string => {
 	let operations = ['+', '-', '*', '/']
 
 	if (difficulty < DifficultyLevels.EASY) {
@@ -29,7 +22,7 @@ export function getRandomOperation(difficulty: number): string {
  * Gera um número aleatório entre min e max.
  * Se integer=true, retorna inteiro. Se false, retorna float com 2 casas decimais.
  */
-export function getRandomNumberBetween(min: number, max: number, integer: boolean = true): number {
+export const getRandomNumberBetween = (min: number, max: number, integer: boolean = true): number => {
 	const randomNumber = Math.random() * (max - min) + min
 	if (integer) {
 		return Math.round(randomNumber)
@@ -42,9 +35,9 @@ export function getRandomNumberBetween(min: number, max: number, integer: boolea
  * Gera uma expressão matemática aleatória baseada na dificuldade.
  * Limita o valor máximo para evitar resultados exagerados.
  */
-export function generateMathExpression(difficulty: number) {
+export const generateMathExpression = (difficulty: number) => {
 	const min = 1
-	const max = Math.min(10 * (difficulty * 2), 50)
+	const max = Math.min(10 * Math.pow(2, difficulty - 1), 200)
 	const numOperations = Math.max(1, Math.min(difficulty, 5))
 
 	let expressionResult = getRandomNumberBetween(min, max, true).toString()
@@ -67,7 +60,7 @@ export function generateMathExpression(difficulty: number) {
 	return expressionResult
 }
 
-export function getPerturbationRange(correctAnswer: number, difficulty: number): number {
+export const getPerturbationRange = (correctAnswer: number, difficulty: number): number => {
 	const minRange = 3
 	const maxRange = 10
 

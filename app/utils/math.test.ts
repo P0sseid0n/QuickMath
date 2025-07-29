@@ -66,11 +66,15 @@ describe('getRandomNumberBetween', () => {
 
 describe('generateMathExpression', () => {
 	it('should generate a valid math expression based on difficulty', () => {
-		const difficulty = 10
-		const expression = MathUtils.generateMathExpression(difficulty)
+		for (let difficulty = 1; difficulty < 5; difficulty++) {
+			const expression = MathUtils.generateMathExpression(difficulty)
+			const countOperations = expression
+				.split(' ')
+				.map(e => e.replace(/\D/g, ''))
+				.filter(e => e !== '').length
 
-		expect(expression).toBeDefined()
-		expect(expression.split(' ').length).toBe(1 + 2 * difficulty)
+			expect(countOperations).toBe(difficulty + 1)
+		}
 	})
 
 	it('should generate a valid math expression with parentheses and no', () => {
