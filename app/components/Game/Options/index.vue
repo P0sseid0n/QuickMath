@@ -50,15 +50,15 @@ function generateOptions() {
 function checkCorrect(option: number) {
 	if (blockClick.value) return
 	blockClick.value = true
-	const rightAnswer = option === correctAnswer
+	const isCorrect = option === correctAnswer
 
-	if (rightAnswer) {
+	if (isCorrect) {
 		console.log('Correct!')
 	} else {
 		console.log('Wrong!')
 	}
 
-	GameStore.startRound()
+	GameStore.startRound({ isCorrect })
 }
 
 watch(

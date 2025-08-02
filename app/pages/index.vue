@@ -23,15 +23,16 @@ onMounted(() => {
 			</header>
 
 			<section class="flex flex-row justify-between">
-				<div>
-					<p>Pontuacao:</p>
+				<div class="flex items-center gap-1">
+					<Icon class="text-2xl" name="i-material-symbols-star-rounded" />
+					<span class="font-medium">{{ GameStore.score }}</span>
 				</div>
 				<div>
 					<button>Modo De Jogo</button>
 				</div>
 			</section>
 
-			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 my-8 w-full text-center">
+			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 mt-4 mb-8 w-full text-center">
 				<h3 :style="{ fontSize }">{{ GameStore.expression }} = ?</h3>
 			</main>
 

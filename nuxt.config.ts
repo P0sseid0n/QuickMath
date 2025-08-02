@@ -18,5 +18,5 @@ export default defineNuxtConfig({
 		strict: true,
 	},
 
-	modules: ['@pinia/nuxt', '@nuxt/test-utils/module'],
+	modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon'],
 })

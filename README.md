@@ -74,6 +74,7 @@ O jogo apresenta uma interface limpa e moderna com:
 
 -  ✅ Geração dinâmica de expressões matemáticas
 -  ✅ Sistema de alternativas inteligente com distractores
+-  ✅ **Sistema de Pontuação** - Pontos são adicionados a cada resposta correta
 -  ✅ Interface responsiva
 -  ✅ Fonte ajustável baseada no tamanho da expressão
 -  ✅ Testes unitários abrangentes
@@ -105,13 +106,27 @@ O jogo utiliza um algoritmo inteligente para gerar:
 3. **Validação** para evitar divisão por zero
 4. **Formatação** adequada para inteiros e decimais
 
+## 🏆 Sistema de Pontuação
+
+O sistema de pontuação funciona da seguinte forma:
+
+-  **10 pontos** são adicionados a cada resposta correta
+-  A pontuação é exibida na tela principal do jogo
+-  A pontuação é mantida durante toda a sessão de jogo
+-  A lógica de pontuação está encapsulada na store para garantir integridade
+-  **API pública da store:**
+   -  `startRound({ isCorrect: true })` - Inicia nova rodada e adiciona pontos se correto
+   -  `resetScore()` - Zera a pontuação
+   -  `score` - Valor atual da pontuação (readonly)
+-  **Funções internas:** `addScore()` é mantida privada para evitar manipulação indevida da pontuação
+
 ## 🧪 Testes
 
 O projeto inclui testes abrangentes para:
 
 -  ✅ Funções utilitárias de matemática
 -  ✅ Componentes Vue
--  ✅ Store do Pinia
+-  ✅ Store do Pinia (incluindo sistema de pontuação)
 -  ✅ Cobertura de código
 
 Execute os testes:
@@ -122,9 +137,15 @@ pnpm test
 
 ## 🚧 Roadmap - Próximas Features
 
+### ✅ Concluído
+
+-  ✅ **Sistema de Pontuação** - Sistema de pontos baseado em acertos (10 pontos por resposta correta)
+
 ### Em Desenvolvimento
 
--  [ ] **Sistema de Pontuação** - Implementar sistema de pontos baseado em acertos e tempo de resposta
+-  [ ] **Tela de Inicio** - Tela inicial com opções de jogo e configurações
+-  [ ] **Tela de Resultados** - Exibir resultados após cada jogo
+-  [ ] **Melhorias no Sistema de Pontuação** - Pontuação baseada em tempo de resposta e dificuldade
 -  [ ] **Temas de Jogo**
    -  [ ] Modo Contra o Tempo - Resolver o máximo de questões em tempo limitado
    -  [ ] Modo Infinito - Jogo contínuo com dificuldade progressiva
