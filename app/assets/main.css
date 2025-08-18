@@ -1,8 +1,13 @@
-@import 'tailwindcss';
+@tailwind utilities;
 
 :root {
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+
+	--color-background: #1a1a1a;
+	--color-button: #2c2c2c;
+	--color-accent: #f3e0ac;
+	--color-text: #ffffff;
 }

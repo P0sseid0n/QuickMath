@@ -30,11 +30,12 @@ export const useGameStore = defineStore('Game', () => {
 	}
 
 	return {
-		expression: readonly(expression),
-		difficulty: readonly(difficulty),
-		score: readonly(score),
+		expression: computed(() => expression.value),
+		difficulty: computed(() => difficulty.value),
+		score: computed(() => score.value),
 
 		startRound,
+		addScore,
 		resetScore,
 	}
 })

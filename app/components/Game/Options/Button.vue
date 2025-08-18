@@ -13,8 +13,8 @@ function formatOption(option: number): string {
 </script>
 
 <template>
-	<button class="w-full bg-white/2 hover:bg-white/3 transition rounded-2xl py-6 cursor-pointer">
-		<p class="text-2xl">
+	<button class="w-full bg-button hover:bg-button/80 transition rounded-2xl py-6">
+		<p class="text-2xl text-text-primary">
 			{{ formatOption(props.value) }}
 		</p>
 	</button>

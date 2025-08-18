@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="bg-slate-900 h-screen w-full text-white font-mono">
+	<div class="bg-background h-screen w-full text-white font-mono">
 		<div class="mx-auto h-full w-full max-w-6xl flex flex-col">
 			<header class="py-16 select-none">
 				<h1 class="text-center text-4xl">QuickMath</h1>
