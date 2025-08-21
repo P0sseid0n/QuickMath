@@ -1,5 +1,5 @@
 import { it, expect, describe } from 'vitest'
-import DifficultyLevels from '~/constants/DifficultyLevels'
+import DifficultyLevels from '@/constants/DifficultyLevels'
 
 import MathUtils from './math'
 

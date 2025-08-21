@@ -1,7 +1,7 @@
 import { it, expect, describe, beforeEach } from 'vitest'
 import { setActivePinia, createPinia } from 'pinia'
 import { useGameStore } from './Game'
-import GameMode from '~/constants/GameMode'
+import GameMode from '@/constants/GameMode'
 
 describe('Game Store', () => {
 	beforeEach(() => {

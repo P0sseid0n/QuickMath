@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGameStore } from '~/stores/Game'
+import { useGameStore } from '@/stores/Game'
 
 const GameStore = useGameStore()
 

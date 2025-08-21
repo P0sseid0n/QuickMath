@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-import GameMode from '~/constants/GameMode'
+import GameMode from '@/constants/GameMode'
 
 import MathUtils from '@/utils/math'
 

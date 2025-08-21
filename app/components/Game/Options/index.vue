@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MathUtils from '@/utils/math'
-import { useGameStore } from '~/stores/Game'
+import { useGameStore } from '@/stores/Game'
 
 const GameStore = useGameStore()
 
