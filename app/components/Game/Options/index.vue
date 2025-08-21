@@ -58,7 +58,7 @@ function checkCorrect(option: number) {
 		console.log('Wrong!')
 	}
 
-	GameStore.startRound({ isCorrect })
+	GameStore.nextRound(isCorrect)
 }
 
 watch(

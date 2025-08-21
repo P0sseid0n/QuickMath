@@ -14,7 +14,7 @@ export default {
 				background: 'var(--color-background)',
 				button: 'var(--color-button)',
 				accent: 'var(--color-accent)',
-				'text-primary': 'var(--color-text)',
+				primary: 'var(--color-text)',
 			},
 		},
 	},

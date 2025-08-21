@@ -88,7 +88,7 @@ app/
 │   └── Game/
 │       └── Options/          # Componentes das opções de resposta
 ├── constants/
-│   └── difficultyLevels.ts   # Constantes de dificuldade
+│   └── DifficultyLevels.ts   # Constantes de dificuldade
 ├── pages/
 │   └── index.vue             # Página principal do jogo
 ├── stores/
@@ -115,10 +115,10 @@ O sistema de pontuação funciona da seguinte forma:
 -  A pontuação é mantida durante toda a sessão de jogo
 -  A lógica de pontuação está encapsulada na store para garantir integridade
 -  **API pública da store:**
-   -  `startRound({ isCorrect: true })` - Inicia nova rodada e adiciona pontos se correto
-   -  `resetScore()` - Zera a pontuação
+   -  `startMatch({ difficulty, mode })` - Inicia uma nova partida com a dificuldade e modo especificados
+   -  `nextRound(isCorrect)` - Avança para a próxima rodada, adicionando pontos se isCorrect for true
    -  `score` - Valor atual da pontuação (readonly)
--  **Funções internas:** `addScore()` é mantida privada para evitar manipulação indevida da pontuação
+-  **Funções internas:** `addScore()` e `resetScore()` são mantidas privadas para evitar manipulação indevida da pontuação
 
 ## 🧪 Testes
 

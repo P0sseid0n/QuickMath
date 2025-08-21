@@ -1,20 +1,27 @@
 import { defineStore } from 'pinia'
 
+import GameMode from '~/constants/GameMode'
+
 import MathUtils from '@/utils/math'
 
 export const useGameStore = defineStore('Game', () => {
 	const expression = ref('')
 
 	const difficulty = ref(1)
-
+	const mode = ref<GameMode>(GameMode.TimeTrial)
 	const score = ref(0)
 
-	function startRound(options: { difficulty?: number; isCorrect?: boolean } = {}) {
-		if (options.difficulty !== undefined && options.difficulty >= 1) {
-			difficulty.value = options.difficulty
-		}
+	function startMatch(options: { difficulty: number; mode: GameMode }) {
+		difficulty.value = options.difficulty
+		mode.value = options.mode
 
-		if (options.isCorrect === true) {
+		resetScore()
+
+		expression.value = MathUtils.generateMathExpression(difficulty.value)
+	}
+
+	function nextRound(isCorrect: boolean = true) {
+		if (isCorrect) {
 			addScore()
 		}
 
@@ -33,9 +40,10 @@ export const useGameStore = defineStore('Game', () => {
 		expression: computed(() => expression.value),
 		difficulty: computed(() => difficulty.value),
 		score: computed(() => score.value),
+		mode: computed(() => mode.value),
 
-		startRound,
+		startMatch,
+		nextRound,
 		addScore,
-		resetScore,
 	}
 })

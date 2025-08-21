@@ -1,5 +1,5 @@
 import { evaluate, floor, round } from 'mathjs'
-import DifficultyLevels from '~/constants/difficultyLevels'
+import DifficultyLevels from '~/constants/DifficultyLevels'
 
 /**
  * Avalia uma expressão matemática de forma segura.

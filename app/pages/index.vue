@@ -4,36 +4,53 @@ import { useGameStore } from '~/stores/Game'
 const GameStore = useGameStore()
 
 const fontSize = computed(() => {
-	const baseSize = 32
-	const minSize = 16
+	const baseSize = 80
+	const minSize = 32
 
 	return `${Math.max(minSize, baseSize - GameStore.expression.length * 0.5)}px`
 })
 
 onMounted(() => {
-	GameStore.startRound()
+	GameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
 })
 </script>
 
 <template>
-	<div class="bg-background h-screen w-full text-white font-mono">
-		<div class="mx-auto h-full w-full max-w-6xl flex flex-col">
-			<header class="py-16 select-none">
-				<h1 class="text-center text-4xl">QuickMath</h1>
+	<div class="bg-background h-screen w-full text-white font-[Poppins]">
+		<div class="mx-auto h-full w-full max-w-5xl flex flex-col px-8">
+			<header class="pt-8 mb-16 flex items-center justify-between">
+				<h1 class="text-center text-4xl select-none text-accent font-bold">QuickMath</h1>
+				<div>
+					<div class="rounded-full size-10 bg-zinc-600"></div>
+				</div>
 			</header>
 
-			<section class="flex flex-row justify-between">
-				<div class="flex items-center gap-1">
-					<Icon class="text-2xl" name="i-material-symbols-star-rounded" />
-					<span class="font-medium">{{ GameStore.score }}</span>
+			<section>
+				<div class="flex gap-10 opacity-75">
+					<div class="flex items-center gap-2">
+						<Icon class="size-6" name="ph:game-controller-duotone" />
+						<p class="text-md">{{ GameStore.mode }}</p>
+					</div>
+					<div class="flex items-center gap-2">
+						<Icon class="size-6" name="ph:speedometer-duotone" />
+						<p class="text-md">{{ GameStore.difficulty }}/10</p>
+					</div>
 				</div>
-				<div>
-					<button>Modo De Jogo</button>
+				<div class="flex flex-row justify-between">
+					<p class="text-xl">
+						<span class="font-semibold">Score:</span> <span class="font-light">{{ GameStore.score }}</span>
+					</p>
+
+					<button
+						class="px-3 py-1 text-sm text-red-500 bg-red-500/5 border border-red-500/20 rounded-md hover:bg-red-500/15 transition"
+					>
+						End Math
+					</button>
 				</div>
 			</section>
 
-			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 mt-4 mb-8 w-full text-center">
-				<h3 :style="{ fontSize }">{{ GameStore.expression }} = ?</h3>
+			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 mt-5 mb-10 w-full text-center">
+				<h3 class="text-accent" :style="{ fontSize }">{{ GameStore.expression }} = ?</h3>
 			</main>
 
 			<GameOptions />

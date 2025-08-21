@@ -14,7 +14,7 @@ function formatOption(option: number): string {
 
 <template>
 	<button class="w-full bg-button hover:bg-button/80 transition rounded-2xl py-6">
-		<p class="text-2xl text-text-primary">
+		<p class="text-2xl text-primary">
 			{{ formatOption(props.value) }}
 		</p>
 	</button>

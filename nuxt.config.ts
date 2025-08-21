@@ -8,5 +8,5 @@ export default defineNuxtConfig({
 
 	css: ['@/assets/main.css'],
 
-	modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon', '@nuxtjs/tailwindcss'],
+	modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon', '@nuxtjs/tailwindcss', '@nuxt/fonts'],
 })
