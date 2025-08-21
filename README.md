@@ -89,6 +89,7 @@ app/
 │       └── Options/          # Componentes das opções de resposta
 ├── constants/
 │   └── DifficultyLevels.ts   # Constantes de dificuldade
+│   └── GameMode.ts           # Constantes de modo de jogo
 ├── pages/
 │   └── index.vue             # Página principal do jogo
 ├── stores/
@@ -143,13 +144,20 @@ pnpm test
 
 ### Em Desenvolvimento
 
--  [ ] **Tela de Inicio** - Tela inicial com opções de jogo e configurações
+#### Bugs
+
+-  [ ] Opacidade da cor do botao das opções de resposta
+-  [ ] Cor do background do botão ao acertar pensando em outros temas
+
+#### Features
+
 -  [ ] **Tela de Resultados** - Exibir resultados após cada jogo
--  [ ] **Melhorias no Sistema de Pontuação** - Pontuação baseada em tempo de resposta e dificuldade
 -  [ ] **Temas de Jogo**
    -  [ ] Modo Contra o Tempo - Resolver o máximo de questões em tempo limitado
    -  [ ] Modo Infinito - Jogo contínuo com dificuldade progressiva
--  [ ] **Perfil de Usuário** - Sistema de cadastro e personalização do jogador
+-  [ ] **Tela de Inicio** - Tela inicial com opções de jogo e configurações
+-  [ ] **Melhorias no Sistema de Pontuação** - Pontuação baseada em tempo de resposta e dificuldade
+-  [ ] **Login/Perfil de Usuário** - Sistema de cadastro e personalização do jogador
 -  [ ] **Ranking de Usuários** - Placar global com melhores pontuações
 
 ### Ideias Futuras

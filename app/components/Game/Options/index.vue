@@ -9,8 +9,8 @@ const blockClick = ref(false)
 let correctAnswer: number
 
 function generateOptions() {
-	const expression = GameStore.expression
-	const difficulty = GameStore.difficulty
+	const expression = GameStore.expression || ''
+	const difficulty = GameStore.difficulty || 1
 
 	if (expression === '') return
 	options.value = []
@@ -47,10 +47,16 @@ function generateOptions() {
 	blockClick.value = false
 }
 
-function checkCorrect(option: number) {
+const checkedOptions = ref<Array<boolean | undefined>>([])
+
+function checkCorrect(option: number, index: number) {
 	if (blockClick.value) return
 	blockClick.value = true
 	const isCorrect = option === correctAnswer
+
+	checkedOptions.value = (checkedOptions.value.length === 0 ? Array(options.value.length).fill(undefined) : checkedOptions.value).map(
+		(v, i) => (i === index ? isCorrect : v)
+	)
 
 	if (isCorrect) {
 		console.log('Correct!')
@@ -58,7 +64,10 @@ function checkCorrect(option: number) {
 		console.log('Wrong!')
 	}
 
-	GameStore.nextRound(isCorrect)
+	setTimeout(() => {
+		GameStore.nextRound(isCorrect)
+		checkedOptions.value = []
+	}, 1000)
 }
 
 watch(
@@ -74,6 +83,12 @@ watch(
 
 <template>
 	<div id="Options" class="grid grid-cols-2 grid-rows-2 gap-4 w-full">
-		<GameOptionsButton v-for="option in options" :key="option" :value="option" @click="() => checkCorrect(option)" />
+		<GameOptionsButton
+			v-for="(option, index) in options"
+			:key="index"
+			:value="option"
+			:is-correct="checkedOptions[index]"
+			@click="() => checkCorrect(option, index)"
+		/>
 	</div>
 </template>
