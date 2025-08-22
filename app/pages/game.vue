@@ -3,10 +3,6 @@ import { useGameStore } from '@/stores/Game'
 
 const GameStore = useGameStore()
 
-definePageMeta({
-	ssr: false,
-})
-
 const fontSize = computed(() => {
 	const baseSize = 80
 	const minSize = 32

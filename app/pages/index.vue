@@ -1,8 +1,4 @@
-<script setup lang="ts">
-definePageMeta({
-	swr: true,
-})
-</script>
+<script setup lang="ts"></script>
 
 <template>
 	<div class="bg-background h-screen w-full text-white font-[Poppins]">

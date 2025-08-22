@@ -6,6 +6,11 @@ export default defineNuxtConfig({
 		strict: true,
 	},
 
+	routeRules: {
+		'/game': { ssr: false },
+		'/': { swr: true },
+	},
+
 	css: ['@/assets/main.css'],
 
 	modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon', '@nuxtjs/tailwindcss', '@nuxt/fonts'],
