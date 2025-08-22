@@ -5,8 +5,8 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	--color-background: #1a1a1a;
-	--color-button: #2c2c2c;
-	--color-accent: #f3e0ac;
-	--color-text: #ffffff;
+	--color-background: 26 26 26;
+	--color-button: 44 44 44;
+	--color-accent: 243 224 172;
+	--color-text: 255 255 255;
 }

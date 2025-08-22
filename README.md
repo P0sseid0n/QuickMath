@@ -146,8 +146,8 @@ pnpm test
 
 #### Bugs
 
--  [ ] Opacidade da cor do botao das opções de resposta
--  [ ] Cor do background do botão ao acertar pensando em outros temas
+-  [x] Opacidade da cor do botao das opções de resposta
+-  [x] Cor do background do botão ao acertar pensando em outros temas
 
 #### Features
 

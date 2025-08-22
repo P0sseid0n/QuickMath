@@ -11,10 +11,10 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				background: 'var(--color-background)',
-				button: 'var(--color-button)',
-				accent: 'var(--color-accent)',
-				primary: 'var(--color-text)',
+				background: 'rgb(var(--color-background) / <alpha-value>)',
+				button: 'rgb(var(--color-button) / <alpha-value>)',
+				accent: 'rgb(var(--color-accent) / <alpha-value>)',
+				primary: 'rgb(var(--color-text) / <alpha-value>)',
 			},
 		},
 	},
