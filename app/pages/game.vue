@@ -12,7 +12,7 @@ const fontSize = computed(() => {
 })
 
 onMounted(() => {
-	GameStore.startMatch({ difficulty: 2, mode: 'TimeTrial' })
+	GameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
 })
 </script>
 

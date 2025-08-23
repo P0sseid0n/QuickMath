@@ -25,9 +25,9 @@ describe('calculateExpression', () => {
 
 describe('getRandomOperation', () => {
 	it('should return a random operation based on difficulty', () => {
-		const easyOperation = MathUtils.getRandomOperation(DifficultyLevels.EASY - 1)
-		const mediumOperation = MathUtils.getRandomOperation(DifficultyLevels.MEDIUM - 1)
-		const hardOperation = MathUtils.getRandomOperation(DifficultyLevels.HARD - 1)
+		const easyOperation = MathUtils.getRandomOperation(DifficultyLevels.EASY[0]!)
+		const mediumOperation = MathUtils.getRandomOperation(DifficultyLevels.MEDIUM[0]!)
+		const hardOperation = MathUtils.getRandomOperation(DifficultyLevels.HARD[0]!)
 
 		expect(['+', '-']).toContain(easyOperation)
 		expect(['+', '-', '*']).toContain(mediumOperation)
@@ -35,7 +35,7 @@ describe('getRandomOperation', () => {
 	})
 
 	it('should return a valid operation', () => {
-		const operation = MathUtils.getRandomOperation(DifficultyLevels.HARD)
+		const operation = MathUtils.getRandomOperation(DifficultyLevels.HARD[0]!)
 
 		expect(['+', '-', '*', '/']).toContain(operation)
 	})
@@ -78,13 +78,11 @@ describe('generateMathExpression', () => {
 	})
 
 	it('should generate a valid math expression with parentheses and no', () => {
-		const difficulty = DifficultyLevels.HARD
-
 		let hasParentheses = false
 		let hasNoParentheses = false
 
 		for (let i = 0; i < 1000; i++) {
-			const expression = MathUtils.generateMathExpression(difficulty)
+			const expression = MathUtils.generateMathExpression(DifficultyLevels.HARD[0]!)
 
 			if (expression.includes('(') || expression.includes(')')) {
 				hasParentheses = true

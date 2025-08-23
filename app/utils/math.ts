@@ -1,4 +1,4 @@
-import { evaluate, round } from 'mathjs'
+import { evaluate, random, randomInt } from 'mathjs'
 import DifficultyLevels from '@/constants/DifficultyLevels'
 
 /**
@@ -9,9 +9,9 @@ export const calculateExpression = (expression: string): number => evaluate(expr
 export const getRandomOperation = (difficulty: number): string => {
 	let operations = ['+', '-', '*', '/']
 
-	if (difficulty < DifficultyLevels.EASY) {
+	if (DifficultyLevels.EASY.includes(difficulty)) {
 		operations = ['+', '-']
-	} else if (difficulty < DifficultyLevels.MEDIUM) {
+	} else if (DifficultyLevels.MEDIUM.includes(difficulty)) {
 		operations = ['+', '-', '*']
 	}
 
@@ -23,12 +23,7 @@ export const getRandomOperation = (difficulty: number): string => {
  * Se integer=true, retorna inteiro. Se false, retorna float com 2 casas decimais.
  */
 export const getRandomNumberBetween = (min: number, max: number, integer: boolean = true): number => {
-	const randomNumber = Math.random() * (max - min) + min
-	if (integer) {
-		return Math.round(randomNumber)
-	} else {
-		return Math.round(randomNumber * 100) / 100
-	}
+	return integer ? randomInt(min, max) : random(min, max)
 }
 
 /**
@@ -36,25 +31,35 @@ export const getRandomNumberBetween = (min: number, max: number, integer: boolea
  * Limita o valor máximo para evitar resultados exagerados.
  */
 export const generateMathExpression = (difficulty: number) => {
-	const min = 1
 	const max = Math.min(10 * Math.pow(2, difficulty - 1), 200)
+	const isEasy = DifficultyLevels.EASY.includes(difficulty)
+	const min = isEasy ? 1 : -max
 	const numOperations = Math.max(1, Math.min(difficulty, 5))
 
-	let expressionResult = getRandomNumberBetween(min, max, true).toString()
+	let current = getRandomNumberBetween(min, max, true)
+	let expressionResult = current.toString()
 	const parenthesesChance = 30
 
 	for (let i = 0; i < numOperations; i++) {
-		const operation = getRandomOperation(difficulty)
-		let nextNumber = getRandomNumberBetween(min, max, true)
+		let operation = getRandomOperation(difficulty)
+		let nextNumber: number
 
-		if (operation === '/' && nextNumber === 0) nextNumber = 1
+		if (isEasy && operation === '-') {
+			if (current === 0) operation = '+'
+
+			nextNumber = getRandomNumberBetween(0, Math.max(0, current), true)
+		} else {
+			nextNumber = getRandomNumberBetween(min, max, true)
+
+			if (operation === '/' && nextNumber === 0) nextNumber = 1
+		}
 
 		const useParentheses = i < numOperations - 1 ? Math.random() < parenthesesChance / 100 : false
-		if (useParentheses) {
-			expressionResult = `(${expressionResult} ${operation} ${nextNumber})`
-		} else {
-			expressionResult = `${expressionResult} ${operation} ${nextNumber}`
-		}
+
+		if (useParentheses) expressionResult = `(${expressionResult} ${operation} ${nextNumber})`
+		else expressionResult = `${expressionResult} ${operation} ${nextNumber}`
+
+		current = calculateExpression(`${current} ${operation} ${nextNumber}`)
 	}
 
 	return expressionResult

@@ -1,6 +1,6 @@
 export default {
-	EASY: 3,
-	MEDIUM: 5,
-	HARD: 8,
-	EXPERT: 10,
-} as const
+	EASY: [1, 2, 3],
+	MEDIUM: [4, 5, 6],
+	HARD: [7, 8, 9],
+	EXPERT: [10],
+}
