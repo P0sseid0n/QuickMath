@@ -26,5 +26,10 @@ export default defineNuxtConfig({
 
 	css: ['@/assets/main.css'],
 
+	fonts: {
+		// Sem isso só o peso 400 é baixado e o navegador simula o negrito
+		families: [{ name: 'Outfit', provider: 'google', weights: [400, 500, 600, 700] }],
+	},
+
 	modules: ['@pinia/nuxt', '@nuxt/test-utils/module', '@nuxt/icon', '@nuxtjs/tailwindcss', '@nuxt/fonts'],
 })
