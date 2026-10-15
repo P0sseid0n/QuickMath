@@ -66,15 +66,15 @@ export const generateMathExpression = (difficulty: number) => {
 }
 
 export const getPerturbationRange = (correctAnswer: number, difficulty: number): number => {
-	const minRange = 3
-	const maxRange = round(10 * (difficulty * 1.1))
+	const a = 1.5 // base suave
+	const b = 2.5 // ganho
+	const s = 25 // atenuação para números pequenos
 
-	if (correctAnswer === 0) return minRange
+	const c = Math.abs(correctAnswer)
+	const base = Math.sqrt(c)
+	const smooth = 1 - Math.exp(-c / s)
 
-	const baseVariance = Math.pow(Math.abs(correctAnswer), 2) / difficulty
-	const stdDeviation = Math.sqrt(baseVariance) * 0.6
-
-	return Math.max(minRange, Math.min(stdDeviation, maxRange))
+	return (a + b * base * smooth) / difficulty
 }
 
 export default {
