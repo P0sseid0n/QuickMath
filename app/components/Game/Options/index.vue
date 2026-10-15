@@ -61,7 +61,7 @@ function checkCorrect(option: number, index: number) {
 	setTimeout(() => {
 		GameStore.nextRound(isCorrect)
 		checkedOptions.value = []
-	}, 1000)
+	}, 500)
 }
 
 watch(

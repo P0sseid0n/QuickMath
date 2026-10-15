@@ -15,7 +15,7 @@ function formatOption(option: number): string {
 
 const buttonClasses = computed(() => {
 	if (props.isCorrect === true) return 'bg-accent text-background ring-accent scale-[1.02]'
-	if (props.isCorrect === false) return 'bg-danger/15 text-danger ring-danger/40 animate-[shake_.35s_ease-in-out]'
+	if (props.isCorrect === false) return 'bg-danger/15 text-danger ring-danger/40 animate-[shake_.25s_ease-in-out]'
 
 	return 'bg-button text-primary ring-transparent hover:-translate-y-0.5 hover:bg-button/70 hover:ring-primary/10 active:translate-y-0 active:scale-[0.98]'
 })
@@ -24,7 +24,7 @@ const buttonClasses = computed(() => {
 <template>
 	<button
 		type="button"
-		class="w-full rounded-2xl py-6 ring-1 ring-inset transition duration-200 ease-out sm:py-7"
+		class="w-full rounded-2xl py-6 ring-1 ring-inset transition duration-150 ease-out sm:py-7"
 		:class="buttonClasses"
 		:aria-hidden="props.fake || undefined"
 		:tabindex="props.fake ? -1 : undefined"
