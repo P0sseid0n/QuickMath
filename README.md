@@ -8,10 +8,11 @@ Jogo de cálculo mental contra o relógio. A cada rodada aparece uma expressão 
 
 1. Na página inicial, clique em **Play**.
 2. Uma expressão como `(12 + 7) × 3 = ?` aparece na tela, com 4 alternativas logo abaixo.
-3. Acertou, ganha 10 pontos. Errou, a alternativa marcada fica vermelha. Nos dois casos, a próxima expressão aparece depois de 1 segundo.
+3. Acertou, ganha 10 pontos. Errou, a alternativa marcada fica vermelha. Nos dois casos, a próxima expressão aparece logo em seguida.
 4. Uma barra de tempo de 10 segundos mostra quanto tempo resta e fica vermelha nos últimos 3 segundos.
+5. A partida termina quando o tempo acaba ou quando o jogador clica em **End match**. Aí aparece a pontuação final, com as opções de jogar de novo ou voltar para a página inicial.
 
-> Por enquanto, as partidas começam sempre na dificuldade 1 e o fim do tempo ainda não encerra a partida. Veja as [issues](https://github.com/P0sseid0n/QuickMath/issues) para o que está planejado.
+> Por enquanto, as partidas começam sempre na dificuldade 1, no modo Contra o Tempo. Veja as [issues](https://github.com/P0sseid0n/QuickMath/issues) para o que está planejado.
 
 ## 🎯 Dificuldade
 
@@ -92,9 +93,10 @@ app/
 A store `useGameStore` (`app/stores/Game.ts`) expõe:
 
 - `startMatch({ difficulty, mode })`: zera a pontuação e gera a primeira expressão
-- `nextRound(isCorrect = true)`: soma pontos se acertou e gera a próxima expressão
+- `nextRound(isCorrect = true)`: soma pontos se acertou e gera a próxima expressão (é ignorado depois que a partida termina)
+- `endMatch()`: encerra a partida
 - `addScore(points = 10)`: soma pontos à pontuação atual
-- `expression`, `difficulty`, `score` e `mode`: estado da partida, somente leitura
+- `expression`, `difficulty`, `score`, `mode` e `isFinished`: estado da partida, somente leitura
 
 ### Tema
 
@@ -105,8 +107,10 @@ As cores ficam em variáveis CSS no `app/assets/main.css` (`--color-background`,
 Os testes ficam ao lado do código que testam:
 
 - `app/utils/math.test.ts`: geração de expressões e faixa das alternativas
-- `app/stores/Game.test.ts`: store da partida e pontuação
-- `app/components/Game/Options/Button.nuxt.test.ts`: formatação das alternativas (testes `*.nuxt.test.ts` rodam no ambiente do Nuxt)
+- `app/stores/Game.test.ts`: store da partida, pontuação e fim de partida
+- `app/components/Game/Options/Button.nuxt.test.ts`: formatação das alternativas
+
+O `vitest.config.ts` separa os testes em dois projetos: `unit`, que roda em Node com os auto-imports do Nuxt, e `nuxt`, que roda no ambiente do Nuxt e pega os arquivos `*.nuxt.test.ts`. Testes de componentes precisam ter `.nuxt.` no nome.
 
 ## 🤝 Contribuindo
 
