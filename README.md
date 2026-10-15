@@ -26,29 +26,29 @@ git clone <url-do-repositorio>
 cd QuickMath
 
 # Instale as dependências
-pnpm install
+bun install
 
 # Execute em modo de desenvolvimento
-pnpm dev
+bun run dev
 ```
 
 ## 📝 Scripts Disponíveis
 
 ```bash
 # Desenvolvimento
-pnpm dev
+bun run dev
 
 # Build para produção
-pnpm build
+bun run build
 
 # Preview da build
-pnpm preview
+bun run preview
 
 # Executar testes
-pnpm test
+bun run test
 
 # Executar testes com coverage
-pnpm test --coverage
+bun run test --coverage
 ```
 
 ## 🎨 Interface
@@ -133,7 +133,7 @@ O projeto inclui testes abrangentes para:
 Execute os testes:
 
 ```bash
-pnpm test
+bun run test
 ```
 
 ## 🚧 Roadmap - Próximas Features
