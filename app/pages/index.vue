@@ -1,31 +1,43 @@
 <script setup lang="ts"></script>
 
 <template>
-	<div class="bg-background h-screen w-full text-white font-[Poppins]">
-		<div class="mx-auto h-full w-full max-w-5xl flex flex-col items-center p-8">
-			<header class="w-full flex items-center justify-end gap-4">
-				<button class="opacity-50 hover:opacity-100 transition">
-					<Icon class="size-8 align-middle" name="ph:gear-six-duotone" />
-				</button>
-				<div class="rounded-full size-10 bg-zinc-600"></div>
-			</header>
+	<div class="relative min-h-dvh w-full overflow-hidden bg-background">
+		<div
+			aria-hidden="true"
+			class="pointer-events-none absolute left-1/2 top-[18%] h-[28rem] w-[44rem] max-w-[140vw] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(var(--color-accent)/0.10),transparent)] blur-2xl"
+		/>
 
-			<h1 class="text-accent text-7xl font-bold w-full text-center mt-32">QuickMath</h1>
-			<h3 class="text-xl w-full text-center mt-2 mb-32 opacity-85">The ultimate math challenge</h3>
+		<div class="relative mx-auto flex min-h-dvh w-full max-w-5xl flex-col items-center px-6 pb-12 pt-6 sm:px-8">
+			<AppHeader />
 
-			<NuxtLink to="/game" class="w-full max-w-96">
-				<button
-					class="mb-8 w-full py-3 text-lg font-semibold bg-accent text-gray-900 rounded-lg shadow-md hover:brightness-110 transition transform"
-				>
-					Play
-				</button>
-			</NuxtLink>
-			<button
-				class="flex items-center justify-center gap-2 w-full max-w-96 py-3 text-lg font-medium text-accent bg-accent/5 border border-accent/40 rounded-lg hover:bg-accent/10 hover:text-accent transition-colors"
-			>
-				<Icon name="ph:trophy-duotone" class="w-5 h-5 text-accent/70" />
-				Ranking
-			</button>
+			<main class="flex w-full flex-1 flex-col items-center justify-center pb-16">
+				<p aria-hidden="true" class="mb-6 font-medium tabular-nums tracking-wide text-accent/40 select-none">7 × 8 − 12 = ?</p>
+
+				<h1 class="text-center text-6xl font-bold leading-none tracking-tighter text-accent sm:text-8xl">QuickMath</h1>
+				<p class="mt-4 max-w-sm text-center text-lg text-primary/65 [text-wrap:balance]">
+					Solve each expression before the clock runs out.
+				</p>
+
+				<div class="mt-16 flex w-full max-w-sm flex-col items-center gap-3">
+					<NuxtLink
+						to="/game"
+						class="group flex w-full items-center justify-center gap-2 rounded-2xl bg-accent py-4 text-lg font-semibold text-background shadow-[0_10px_30px_-12px_rgb(var(--color-accent)/0.5)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-12px_rgb(var(--color-accent)/0.6)] active:translate-y-0 active:scale-[0.98]"
+					>
+						<Icon name="ph:play-fill" class="size-5 transition-transform duration-200 group-hover:translate-x-0.5" />
+						Play
+					</NuxtLink>
+
+					<button
+						type="button"
+						disabled
+						class="flex w-full items-center justify-center gap-2 rounded-2xl py-3 font-medium text-primary/45 disabled:cursor-not-allowed"
+					>
+						<Icon name="ph:trophy-duotone" class="size-5" />
+						Ranking
+						<span class="rounded-md bg-button px-1.5 py-0.5 text-xs font-medium text-primary/50">soon</span>
+					</button>
+				</div>
+			</main>
 		</div>
 	</div>
 </template>

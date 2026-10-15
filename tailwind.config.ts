@@ -14,6 +14,7 @@ export default {
 				background: 'rgb(var(--color-background) / <alpha-value>)',
 				button: 'rgb(var(--color-button) / <alpha-value>)',
 				accent: 'rgb(var(--color-accent) / <alpha-value>)',
+				danger: 'rgb(var(--color-danger) / <alpha-value>)',
 				primary: 'rgb(var(--color-text) / <alpha-value>)',
 			},
 		},

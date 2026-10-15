@@ -3,6 +3,8 @@ import { useGameStore } from '@/stores/Game'
 
 const GameStore = useGameStore()
 
+const timer = useTemplateRef('timer')
+
 const fontSize = computed(() => {
 	const baseSize = 80
 	const minSize = 32
@@ -11,54 +13,60 @@ const fontSize = computed(() => {
 	return `${Math.max(minSize, baseSize - expressionLength * 0.5)}px`
 })
 
+const displayExpression = computed(() =>
+	(GameStore.expression || '').replace(/\*/g, '×').replace(/\//g, '÷').replace(/-/g, '−')
+)
+
 onMounted(() => {
 	GameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
+	timer.value?.startTimer()
 })
 </script>
 
 <template>
-	<div class="bg-background h-screen w-full text-white font-[Poppins]">
-		<div class="mx-auto h-full w-full max-w-5xl flex flex-col p-8">
-			<header class="mb-16 flex items-center justify-between">
-				<h1 class="text-center text-4xl select-none text-accent font-bold">QuickMath</h1>
-				<div class="flex items-center gap-4">
-					<button class="opacity-50 hover:opacity-100 transition">
-						<Icon class="size-8 align-middle" name="ph:gear-six-duotone" />
-					</button>
-					<div class="rounded-full size-10 bg-zinc-600"></div>
-				</div>
-			</header>
+	<div class="min-h-dvh w-full bg-background">
+		<div class="mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-6 pb-10 pt-6 sm:px-8">
+			<AppHeader show-logo class="mb-12" />
 
-			<section>
-				<div class="flex gap-10 opacity-75">
-					<div class="flex items-center gap-2">
-						<Icon class="size-6" name="ph:game-controller-duotone" />
-						<p class="text-md">{{ GameStore.mode }}</p>
+			<main class="flex flex-1 flex-col">
+				<section aria-label="Match info" class="flex items-end justify-between gap-4">
+					<div>
+						<div class="flex gap-5 text-sm text-primary/55">
+							<span class="flex items-center gap-1.5">
+								<Icon class="size-4" name="ph:game-controller-duotone" />
+								{{ GameStore.mode }}
+							</span>
+							<span class="flex items-center gap-1.5 tabular-nums">
+								<Icon class="size-4" name="ph:speedometer-duotone" />
+								{{ GameStore.difficulty }}/10
+							</span>
+						</div>
+						<p class="mt-2 flex items-baseline gap-2">
+							<span class="text-sm font-medium text-primary/55">Score</span>
+							<span class="text-3xl font-semibold tabular-nums tracking-tight">{{ GameStore.score }}</span>
+						</p>
 					</div>
-					<div class="flex items-center gap-2">
-						<Icon class="size-6" name="ph:speedometer-duotone" />
-						<p class="text-md">{{ GameStore.difficulty }}/10</p>
-					</div>
-				</div>
-				<div class="flex flex-row justify-between">
-					<p class="text-xl">
-						<span class="font-semibold">Score:</span> <span class="opacity-75">{{ GameStore.score }}</span>
-					</p>
 
 					<button
-						class="px-3 py-2 text-sm text-red-500 bg-red-500/5 border border-red-500/20 rounded-md hover:bg-red-500/15 transition"
+						type="button"
+						class="flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-medium text-danger/80 transition duration-200 hover:bg-danger/10 hover:text-danger active:scale-95"
 					>
-						<Icon class="align-middle" name="ph:stop-duotone" />
-						End Math
+						<Icon class="size-4" name="ph:stop-duotone" />
+						End match
 					</button>
-				</div>
-			</section>
+				</section>
 
-			<main id="Display" class="select-none bg-white/2 rounded-2xl py-20 mt-5 mb-10 w-full text-center">
-				<h3 class="text-accent" :style="{ fontSize }">{{ GameStore.expression }} = ?</h3>
+				<section
+					aria-live="polite"
+					class="mb-8 mt-5 rounded-3xl bg-button/40 px-6 py-16 text-center ring-1 ring-inset ring-primary/5 select-none sm:py-20"
+				>
+					<h2 class="font-semibold tabular-nums tracking-tight text-accent" :style="{ fontSize }">{{ displayExpression }} = ?</h2>
+				</section>
+
+				<GameOptions />
+
+				<GameTimer ref="timer" class="mt-auto pt-16" />
 			</main>
-
-			<GameOptions />
 		</div>
 	</div>
 </template>
