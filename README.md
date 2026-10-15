@@ -1,183 +1,122 @@
 # QuickMath
 
-Um jogo de matemática rápida desenvolvido com Nuxt 3, onde os jogadores resolvem expressões matemáticas de múltipla escolha com diferentes níveis de dificuldade.
+Jogo de cálculo mental contra o relógio. A cada rodada aparece uma expressão matemática e o jogador escolhe a resposta certa entre 4 alternativas.
 
-## 🎮 Como Funciona
+**Jogue em:** https://quick-math-one.vercel.app
 
-O jogo apresenta expressões matemáticas que o jogador deve resolver escolhendo entre 4 alternativas. As expressões são geradas dinamicamente baseadas no nível de dificuldade selecionado.
+## 🎮 Como funciona
+
+1. Na página inicial, clique em **Play**.
+2. Uma expressão como `(12 + 7) × 3 = ?` aparece na tela, com 4 alternativas logo abaixo.
+3. Acertou, ganha 10 pontos. Errou, a alternativa marcada fica vermelha. Nos dois casos, a próxima expressão aparece depois de 1 segundo.
+4. Uma barra de tempo de 10 segundos mostra quanto tempo resta e fica vermelha nos últimos 3 segundos.
+
+> Por enquanto, as partidas começam sempre na dificuldade 1 e o fim do tempo ainda não encerra a partida. Veja as [issues](https://github.com/P0sseid0n/QuickMath/issues) para o que está planejado.
+
+## 🎯 Dificuldade
+
+A dificuldade vai de 1 a 10 e controla as operações, o tamanho dos números e o tamanho da expressão.
+
+| Nível | Dificuldades | Operações | Números |
+| --- | --- | --- | --- |
+| Fácil | 1–3 | `+` `−` | Só positivos, e a subtração nunca dá resultado negativo |
+| Médio | 4–6 | `+` `−` `×` | Positivos e negativos |
+| Difícil | 7–9 | `+` `−` `×` `÷` | Positivos e negativos |
+| Expert | 10 | `+` `−` `×` `÷` | Positivos e negativos |
+
+- **Tamanho dos números**: o maior valor possível dobra a cada nível (10, 20, 40...), até o limite de 200.
+- **Tamanho da expressão**: o número de operações é igual à dificuldade, até o máximo de 5.
+- **Parênteses**: cada operação tem 30% de chance de ser agrupada entre parênteses.
+- **Alternativas erradas**: são geradas perto da resposta certa, numa faixa que cresce com o tamanho do resultado e diminui conforme a dificuldade aumenta. Assim, nos níveis mais altos, as opções ficam mais parecidas entre si.
 
 ## 🚀 Tecnologias
 
--  **Nuxt 3** - Framework Vue.js
--  **Vue 3** - Framework JavaScript reativo
--  **Pinia** - Gerenciamento de estado
--  **TypeScript** - Tipagem estática
--  **Tailwind CSS** - Framework CSS utilitário
--  **Vitest** - Framework de testes
--  **MathJS** - Biblioteca para avaliação de expressões matemáticas
+- **[Nuxt 4](https://nuxt.com)** com Vue 3 e TypeScript
+- **[Pinia](https://pinia.vuejs.org)** para o estado da partida
+- **[Tailwind CSS](https://tailwindcss.com)** para os estilos
+- **[Math.js](https://mathjs.org)** para avaliar as expressões
+- **[Nuxt Icon](https://github.com/nuxt/icon)** com os ícones [Phosphor](https://phosphoricons.com) e **[Nuxt Fonts](https://fonts.nuxt.com)** com a fonte Outfit
+- **[Vitest](https://vitest.dev)** e Testing Library para os testes
+- **[Bun](https://bun.sh)** como gerenciador de pacotes
 
-## ⚙️ Instalação
+## ⚙️ Rodando localmente
+
+Requer o [Bun](https://bun.sh) instalado.
 
 ```bash
-# Clone o repositório
-git clone <url-do-repositorio>
-
-# Entre no diretório
+git clone https://github.com/P0sseid0n/QuickMath.git
 cd QuickMath
-
-# Instale as dependências
 bun install
-
-# Execute em modo de desenvolvimento
 bun run dev
 ```
 
-## 📝 Scripts Disponíveis
+O app sobe em http://localhost:3000.
 
-```bash
-# Desenvolvimento
-bun run dev
+### Scripts
 
-# Build para produção
-bun run build
+| Comando | O que faz |
+| --- | --- |
+| `bun run dev` | Servidor de desenvolvimento |
+| `bun run build` | Build de produção |
+| `bun run preview` | Serve a build de produção localmente |
+| `bun run generate` | Gera o site estático |
+| `bun run test` | Roda os testes com Vitest |
+| `bun run test --coverage` | Roda os testes com relatório de cobertura |
 
-# Preview da build
-bun run preview
+> Use `bun run test`, e não `bun test`: o `bun test` chama o test runner do próprio Bun, não o Vitest.
 
-# Executar testes
-bun run test
-
-# Executar testes com coverage
-bun run test --coverage
-```
-
-## 🎨 Interface
-
-O jogo apresenta uma interface limpa e moderna com:
-
--  Design escuro e minimalista
--  Grid 2x2 para as opções de resposta
--  Fonte monoespaçada para melhor legibilidade
--  Transições suaves nos botões
--  Responsividade em diferentes dispositivos
-
-## 🎯 Funcionalidades
-
-### Níveis de Dificuldade
-
--  **Fácil** (< 3): Soma e subtração
--  **Médio** (< 5): Soma, subtração e multiplicação
--  **Difícil** (< 8): Todas as operações básicas
--  **Expert** (≥ 8): Operações complexas com parênteses
-
-### Características
-
--  ✅ Geração dinâmica de expressões matemáticas
--  ✅ Sistema de alternativas inteligente com distractores
--  ✅ **Sistema de Pontuação** - Pontos são adicionados a cada resposta correta
--  ✅ Interface responsiva
--  ✅ Fonte ajustável baseada no tamanho da expressão
--  ✅ Testes unitários abrangentes
--  ✅ TypeScript para maior segurança de tipos
-
-## 🏗️ Estrutura do Projeto
+## 🏗️ Estrutura do projeto
 
 ```
 app/
+├── assets/main.css             # Variáveis de cor e estilos base
 ├── components/
+│   ├── AppHeader.vue           # Header compartilhado entre as páginas
 │   └── Game/
-│       └── Options/          # Componentes das opções de resposta
+│       ├── Timer.vue           # Barra de tempo da rodada
+│       └── Options/            # Grid 2x2 com as alternativas de resposta
 ├── constants/
-│   └── DifficultyLevels.ts   # Constantes de dificuldade
-│   └── GameMode.ts           # Constantes de modo de jogo
+│   ├── DifficultyLevels.ts     # Faixas de dificuldade (fácil, médio, difícil, expert)
+│   └── GameMode.ts             # Modos de jogo
 ├── pages/
-│   └── index.vue             # Página principal do jogo
+│   ├── index.vue               # Página inicial
+│   └── game.vue                # Tela da partida
 ├── stores/
-│   └── Game.ts               # Store do Pinia para estado do jogo
+│   └── Game.ts                 # Estado da partida (expressão, pontuação, modo)
 └── utils/
-    └── math.ts               # Utilitários matemáticos
+    └── math.ts                 # Geração e avaliação das expressões
 ```
 
-## 🧮 Sistema de Geração de Expressões
+### Store da partida
 
-O jogo utiliza um algoritmo inteligente para gerar:
+A store `useGameStore` (`app/stores/Game.ts`) expõe:
 
-1. **Expressões matemáticas** baseadas na dificuldade
-2. **Alternativas plausíveis** usando perturbação controlada
-3. **Validação** para evitar divisão por zero
-4. **Formatação** adequada para inteiros e decimais
+- `startMatch({ difficulty, mode })`: zera a pontuação e gera a primeira expressão
+- `nextRound(isCorrect = true)`: soma pontos se acertou e gera a próxima expressão
+- `addScore(points = 10)`: soma pontos à pontuação atual
+- `expression`, `difficulty`, `score` e `mode`: estado da partida, somente leitura
 
-## 🏆 Sistema de Pontuação
+### Tema
 
-O sistema de pontuação funciona da seguinte forma:
-
--  **10 pontos** são adicionados a cada resposta correta
--  A pontuação é exibida na tela principal do jogo
--  A pontuação é mantida durante toda a sessão de jogo
--  A lógica de pontuação está encapsulada na store para garantir integridade
--  **API pública da store:**
-   -  `startMatch({ difficulty, mode })` - Inicia uma nova partida com a dificuldade e modo especificados
-   -  `nextRound(isCorrect)` - Avança para a próxima rodada, adicionando pontos se isCorrect for true
-   -  `score` - Valor atual da pontuação (readonly)
--  **Funções internas:** `addScore()` e `resetScore()` são mantidas privadas para evitar manipulação indevida da pontuação
+As cores ficam em variáveis CSS no `app/assets/main.css` (`--color-background`, `--color-button`, `--color-accent`, `--color-danger` e `--color-text`). No Tailwind, elas viram as classes `background`, `button`, `accent`, `danger` e `primary`.
 
 ## 🧪 Testes
 
-O projeto inclui testes abrangentes para:
+Os testes ficam ao lado do código que testam:
 
--  ✅ Funções utilitárias de matemática
--  ✅ Componentes Vue
--  ✅ Store do Pinia (incluindo sistema de pontuação)
--  ✅ Cobertura de código
-
-Execute os testes:
-
-```bash
-bun run test
-```
-
-## 🚧 Roadmap - Próximas Features
-
-### ✅ Concluído
-
--  ✅ **Sistema de Pontuação** - Sistema de pontos baseado em acertos (10 pontos por resposta correta)
-
-### Em Desenvolvimento
-
-#### Bugs
-
--  [x] Opacidade da cor do botao das opções de resposta
--  [x] Cor do background do botão ao acertar pensando em outros temas
-
-#### Features
-
--  [ ] **Tela de Resultados** - Exibir resultados após cada jogo
--  [ ] **Temas de Jogo**
-   -  [ ] Modo Contra o Tempo - Resolver o máximo de questões em tempo limitado
-   -  [ ] Modo Infinito - Jogo contínuo com dificuldade progressiva
--  [ ] **Tela de Inicio** - Tela inicial com opções de jogo e configurações
--  [ ] **Melhorias no Sistema de Pontuação** - Pontuação baseada em tempo de resposta e dificuldade
--  [ ] **Login/Perfil de Usuário** - Sistema de cadastro e personalização do jogador
--  [ ] **Ranking de Usuários** - Placar global com melhores pontuações
-
-### Ideias Futuras
-
--  [ ] Conquistas e badges
--  [ ] Multiplayer em tempo real
--  [ ] Estatísticas detalhadas de desempenho
--  [ ] Sistema de níveis e progressão
--  [ ] Personalização de temas e cores
--  [ ] Integração com redes sociais para compartilhamento de conquistas
--  [ ] Suporte a múltiplos idiomas
+- `app/utils/math.test.ts`: geração de expressões e faixa das alternativas
+- `app/stores/Game.test.ts`: store da partida e pontuação
+- `app/components/Game/Options/Button.nuxt.test.ts`: formatação das alternativas (testes `*.nuxt.test.ts` rodam no ambiente do Nuxt)
 
 ## 🤝 Contribuindo
 
+As próximas features e ideias estão nas [issues](https://github.com/P0sseid0n/QuickMath/issues). Para contribuir:
+
 1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+2. Crie uma branch (`git checkout -b feature/minha-feature`)
+3. Faça commit das mudanças e rode `bun run test`
+4. Abra um Pull Request citando a issue relacionada
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+Distribuído sob a licença MIT. Veja o arquivo [`LICENSE`](LICENSE).
