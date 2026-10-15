@@ -58,12 +58,6 @@ function checkCorrect(option: number, index: number) {
 		(v, i) => (i === index ? isCorrect : v)
 	)
 
-	if (isCorrect) {
-		console.log('Correct!')
-	} else {
-		console.log('Wrong!')
-	}
-
 	setTimeout(() => {
 		GameStore.nextRound(isCorrect)
 		checkedOptions.value = []

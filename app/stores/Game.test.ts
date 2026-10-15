@@ -79,4 +79,38 @@ describe('Game Store', () => {
 		gameStore.startMatch({ difficulty: 2, mode: 'TimeTrial' })
 		expect(gameStore.score).toBe(0)
 	})
+
+	it('should finish the match on endMatch', () => {
+		const gameStore = useGameStore()
+		gameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
+
+		expect(gameStore.isFinished).toBe(false)
+
+		gameStore.endMatch()
+		expect(gameStore.isFinished).toBe(true)
+	})
+
+	it('should ignore nextRound after the match has finished', () => {
+		const gameStore = useGameStore()
+		gameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
+		gameStore.nextRound(true)
+
+		const expression = gameStore.expression
+		gameStore.endMatch()
+		gameStore.nextRound(true)
+
+		expect(gameStore.score).toBe(10)
+		expect(gameStore.expression).toBe(expression)
+	})
+
+	it('should reopen the match when starting again after it finished', () => {
+		const gameStore = useGameStore()
+		gameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
+		gameStore.nextRound(true)
+		gameStore.endMatch()
+
+		gameStore.startMatch({ difficulty: 1, mode: 'TimeTrial' })
+		expect(gameStore.isFinished).toBe(false)
+		expect(gameStore.score).toBe(0)
+	})
 })
