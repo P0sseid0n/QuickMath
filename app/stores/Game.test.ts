@@ -4,9 +4,9 @@ import { useGameStore } from './Game'
 import GameMode from '@/constants/GameMode'
 
 describe('Game Store', () => {
-	// beforeEach(() => {
-	// setActivePinia(createPinia())
-	// })
+	beforeEach(() => {
+		setActivePinia(createPinia())
+	})
 
 	it('should initialize with default values', () => {
 		const gameStore = useGameStore()
